@@ -7,6 +7,7 @@ import morgan from "morgan";
 import * as dynamoose from "dynamoose";
 
 // Routes imports
+import courseRoutes from "./routes/courseRoutes";
 
 // configureation
 
@@ -34,21 +35,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 
-//Routes 
-
+//Routes
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-
-//server 
+app.use("/courses", courseRoutes);
+//server
 
 const port = process.env.PORT || 3000;
 
-if(!isProduction){
-
-    app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
-    });
+if (!isProduction) {
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
 }
